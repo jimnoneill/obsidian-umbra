@@ -1,0 +1,57 @@
+# Obsidian Umbra — configuration
+# Copy to config.yaml and edit.
+
+# REQUIRED -----------------------------------------------------------------
+vault: ~/Documents/MyVault         # Root of your Obsidian vault
+model_path: ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf
+
+# Where topic notes land (relative to vault)
+output_subdir: umbra
+
+# Where state/cache/logs are kept (absolute path)
+state_dir: ~/.obsidian-umbra
+
+# Which GPU to use
+cuda_visible_devices: "0"
+
+# PHASE 1 — Daily Note Splitter -------------------------------------------
+# Parses MM-DD-YYYY and YYYY-MM-DD daily notes, calls the local LLM,
+# writes one titled topic note per extracted theme.
+n_ctx: 16384
+n_gpu_layers: -1                   # -1 = load all layers on GPU
+temperature: 0.2
+max_tokens_per_call: 3584
+min_daily_note_chars: 80
+
+# PHASE 2 — Semantic Backlinks --------------------------------------------
+# Potion-32M (256-dim) embeddings + cosine similarity top-K + tag bonus.
+top_k_related: 5
+min_similarity: 0.30
+tag_bonus: 0.05
+tag_bonus_cap: 0.15
+embed_snippet_len: 800
+
+# PHASE 3 — Keyword Linker ------------------------------------------------
+# Injects inline [[wikilinks]] where note stems / folder names appear.
+# Single-word keywords must be CamelCase, acronym, or contain digits.
+min_keyword_len: 3
+max_keyword_passes: 10
+
+# PHASE 4 — Synonym Linker ------------------------------------------------
+# GTE-large (1024-dim) + cuML HDBSCAN clusters titles into synonym groups.
+hdbscan_min_cluster_size: 2
+hdbscan_min_samples: 1
+hdbscan_epsilon: 0.35
+hdbscan_method: leaf
+max_cluster_full_crosslink: 20     # bigger clusters collapse to hub+spoke
+
+# SHARED ------------------------------------------------------------------
+# Directories excluded from all phases (relative to vault)
+skip_dirs:
+  - .obsidian
+  - .trash
+  - Templates
+
+# Files excluded from all phases
+skip_files:
+  - NOTE_INDEX.md

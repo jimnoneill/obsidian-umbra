@@ -1,0 +1,19 @@
+# Core
+pyyaml>=6.0
+numpy>=1.24,<3.0
+
+# Phase 1 — local Qwen3-4B-Instruct inference
+llama-cpp-python>=0.3.0
+
+# Phase 2 — Potion-32M static embeddings (256-dim, CPU-fast)
+model2vec>=0.3.0
+
+# Phase 4 — GTE-large embeddings + cuML HDBSCAN clustering
+sentence-transformers>=3.0
+
+# scipy needed for centroid distance in synonym clustering
+scipy>=1.10
+
+# GPU deps (install separately via conda/rapids — see README):
+#   cupy-cuda12x
+#   cuml (via rapidsai conda or pip wheel)

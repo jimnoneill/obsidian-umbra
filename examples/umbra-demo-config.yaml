@@ -1,0 +1,15 @@
+# Template config used when running Umbra against the Plato demo vault.
+# Edit `model_path` to point at your local Qwen3-4B-Instruct GGUF, copy
+# the before/ vault to a working location, then run:
+#
+#   cp -r examples/before /tmp/plato-vault
+#   UMBRA_CONFIG=examples/umbra-demo-config.yaml \
+#   UMBRA_VAULT=/tmp/plato-vault \
+#   UMBRA_STATE_DIR=/tmp/.umbra-state \
+#   python -m umbra.cli all
+
+vault: /tmp/plato-vault
+model_path: ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf
+output_subdir: umbra
+state_dir: /tmp/.umbra-state
+cuda_visible_devices: "0"
