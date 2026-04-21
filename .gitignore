@@ -3,6 +3,10 @@ __pycache__/
 *.pyo
 *.egg-info/
 src/*.egg-info/
+build/
+dist/
+*.whl
+*.tar.gz
 .venv/
 venv/
 .env

@@ -246,9 +246,18 @@ def main(argv: list[str] | None = None) -> int:
 
     # Import llama_cpp lazily so --help doesn't require GPU stack
     from llama_cpp import Llama
-    log_line(log_file, f"Loading model: {cfg.model_path}")
-    llm = Llama(model_path=str(cfg.model_path), n_ctx=cfg.n_ctx,
-                n_gpu_layers=cfg.n_gpu_layers, verbose=False)
+    log_line(log_file, f"Loading model: {cfg.model_name} ({cfg.model_path})")
+    llama_kwargs = dict(
+        model_path=str(cfg.model_path),
+        n_ctx=cfg.n_ctx,
+        n_gpu_layers=cfg.n_gpu_layers,
+        verbose=False,
+    )
+    if cfg.chat_format:
+        llama_kwargs["chat_format"] = cfg.chat_format
+    if cfg.n_threads:
+        llama_kwargs["n_threads"] = cfg.n_threads
+    llm = Llama(**llama_kwargs)
     log_line(log_file, "Model loaded.")
 
     ok = failed = 0

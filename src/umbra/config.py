@@ -22,8 +22,11 @@ class Config:
     cuda_visible_devices: str = "0"
 
     # Phase 1 (daily splitter) ----------------------------------------------
+    model_name: str = "Qwen3-4B-Instruct-2507"   # human-readable label in logs
+    chat_format: str | None = "chatml"           # llama-cpp chat template name
     n_ctx: int = 16384
-    n_gpu_layers: int = -1
+    n_gpu_layers: int = -1                        # -1 = all on GPU; 0 = CPU only
+    n_threads: int | None = None                  # CPU threads (None = auto)
     temperature: float = 0.2
     max_tokens_per_call: int = 3584
     min_daily_note_chars: int = 80

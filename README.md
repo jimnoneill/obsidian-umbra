@@ -11,12 +11,15 @@
   <a href="#how-it-works">How It Works</a> •
   <a href="#before--after">Before / After</a> •
   <a href="docs/phases.md">Phases</a> •
+  <a href="docs/models.md">Models</a> •
   <a href="docs/troubleshooting.md">Troubleshooting</a>
 </p>
 
 <p align="center">
+  <a href="https://pypi.org/project/obsidian-umbra/"><img src="https://img.shields.io/pypi/v/obsidian-umbra.svg?style=flat-square&color=7c3aed" alt="PyPI version"></a>
+  <img src="https://img.shields.io/pypi/pyversions/obsidian-umbra.svg?style=flat-square" alt="Python versions">
   <img src="https://img.shields.io/badge/Obsidian-0.16+-7c3aed?style=flat-square&logo=obsidian" alt="Obsidian">
-  <img src="https://img.shields.io/badge/Qwen3-4B%20Instruct-ff6b35?style=flat-square" alt="Qwen3-4B">
+  <img src="https://img.shields.io/badge/Models-Qwen%20%7C%20Llama%203%20%7C%20Mistral%20%7C%20Gemma-ff6b35?style=flat-square" alt="Supported models">
   <img src="https://img.shields.io/badge/NVIDIA-CUDA%2012+-76b900?style=flat-square&logo=nvidia" alt="NVIDIA CUDA">
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License">
   <a href="https://paypal.me/jimnoneill"><img src="https://img.shields.io/badge/Donate-PayPal-00457C?style=flat-square&logo=paypal" alt="Donate via PayPal"></a>
@@ -55,7 +58,13 @@ Umbra runs entirely on your own machine. It splits daily journal entries into ti
 | **Model** | Qwen3-4B-Instruct Q8_0 GGUF (~4GB) |
 | **Obsidian** | 0.16+ (any recent release) |
 
-### 1. Clone & Install
+### 1. Install
+
+```bash
+pip install obsidian-umbra
+```
+
+Or from source if you want the latest `main`:
 
 ```bash
 git clone https://github.com/jimnoneill/obsidian-umbra
@@ -63,13 +72,25 @@ cd obsidian-umbra
 pip install -e .
 ```
 
-### 2. Download the Model
+### 2. Download a Model
+
+Default — Qwen3-4B-Instruct Q8_0 (4.3 GB, best quality on 24GB+ VRAM):
 
 ```bash
 mkdir -p ~/models
-wget -O ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf \
-  https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-Q8_0.gguf
+huggingface-cli download Qwen/Qwen3-4B-Instruct-2507-GGUF \
+  Qwen3-4B-Instruct-2507-Q8_0.gguf --local-dir ~/models
 ```
+
+Lighter — Qwen3-4B-Instruct Q4_K_M (2.5 GB, runs fine on 12GB):
+
+```bash
+huggingface-cli download Qwen/Qwen3-4B-Instruct-2507-GGUF \
+  Qwen3-4B-Instruct-2507-Q4_K_M.gguf --local-dir ~/models
+```
+
+Any GGUF instruct model works — Llama 3, Mistral, Gemma, Phi-3. See
+[docs/models.md](docs/models.md) for the supported-models matrix.
 
 ### 3. Configure
 
@@ -81,7 +102,9 @@ Edit `config.yaml`:
 
 ```yaml
 vault: ~/Documents/MyVault                                 # Your Obsidian vault
-model_path: ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf      # The GGUF you just downloaded
+model_path: ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf      # Any GGUF instruct model
+model_name: Qwen3-4B-Instruct-2507                         # Label used in logs
+chat_format: chatml                                        # See docs/models.md
 output_subdir: umbra                                       # Topic notes land here
 state_dir: ~/.obsidian-umbra                               # State/cache/logs
 cuda_visible_devices: "0"                                  # Which GPU
@@ -211,9 +234,12 @@ Each phase also accepts per-phase flags (`--dry-run`, `--rebuild`, `--one PATH`,
 | Document | Description |
 |----------|-------------|
 | [Phases](docs/phases.md) | Deep dive on each of the four phases |
+| [Models](docs/models.md) | Supported LLMs + Q4 vs Q8 quantization |
 | [Configuration](docs/configuration.md) | All settings reference |
 | [Troubleshooting](docs/troubleshooting.md) | Common issues & fixes |
 | [Manual Setup](docs/manual-setup.md) | Step-by-step without scripts |
+| [Releasing](docs/releasing.md) | Maintainer version + PyPI workflow |
+| [Changelog](CHANGELOG.md) | Version history (SemVer) |
 
 ---
 
