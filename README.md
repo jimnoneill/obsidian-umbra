@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="docs/assets/logo.svg" alt="Obsidian Umbra" width="120">
+  <img src="docs/assets/logo.png" alt="Obsidian Umbra" width="320">
 </p>
-
-<h1 align="center">Obsidian Umbra</h1>
 
 <p align="center">
   <strong>Turn any Obsidian vault into a Zettelkasten graph — locally, with a dozen years of notes in minutes.</strong>
