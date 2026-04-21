@@ -3,15 +3,15 @@
 </p>
 
 <p align="center">
-  <strong>Turn any Obsidian vault into a Zettelkasten graph — locally, with a dozen years of notes in minutes.</strong>
+  <strong>A local pipeline that turns years of daily Obsidian notes into a Zettelkasten graph. Nothing leaves your machine.</strong>
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#how-it-works">How It Works</a> •
-  <a href="#before--after">Before / After</a> •
-  <a href="docs/phases.md">Phases</a> •
-  <a href="docs/models.md">Models</a> •
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#before-and-after">Before and after</a> ·
+  <a href="docs/phases.md">Phases</a> ·
+  <a href="docs/models.md">Models</a> ·
   <a href="docs/troubleshooting.md">Troubleshooting</a>
 </p>
 
@@ -27,44 +27,41 @@
 
 ---
 
-## Why?
+## Why
 
-Obsidian's graph view is only as good as the `[[wikilinks]]` you remember to write. Years of daily notes pile up with zero connections. LLM "second brain" tools exist — but they send every note to a cloud API.
+Obsidian's graph view is only as rich as the `[[wikilinks]]` you remembered
+to write at the time. After a few hundred daily notes the graph is mostly
+islands. There are plenty of "second brain" tools that fix that by sending
+every note to a cloud API, which is a hard no if you journal about anything
+personal. Umbra does the same work on your own machine.
 
-Umbra runs entirely on your own machine. It splits daily journal entries into titled topic notes, then weaves four layers of backlinks across your whole vault so the graph actually lights up.
+It reads your daily notes, asks a local LLM to pull out distinct topics,
+creates one titled note per topic, and then weaves four kinds of links
+across the whole vault so the graph actually connects.
 
 ```
-┌─────────────────────────┐                    ┌─────────────────────────┐
-│     OBSIDIAN VAULT      │                    │        LOCAL GPU        │
-│                         │    file I/O only   │                         │
-│   Daily notes           │◄──────────────────►│   Qwen3-4B-Instruct     │
-│   Project notes         │                    │   Potion-32M            │
-│   Folder structure      │                    │   GTE-large + HDBSCAN   │
-│                         │                    │                         │
-│   [[wikilinks]] graph   │   nothing leaves   │   4-phase pipeline      │
-└─────────────────────────┘   your machine     └─────────────────────────┘
+  OBSIDIAN VAULT                        LOCAL GPU
+
+  daily notes                           Qwen3-4B-Instruct (topic split)
+  project notes      <--  file I/O -->  Potion-32M (semantic neighbors)
+  folder tree                           GTE-large + HDBSCAN (synonyms)
+
+  graph of [[wikilinks]]                nothing leaves your machine
 ```
 
-## Quick Start
+## Quick start
 
-### Prerequisites
+You need Linux with an NVIDIA GPU (12GB VRAM is enough for the Q4 model,
+24GB gives you Q8 quality), CUDA 12 or newer, Python 3.10 or newer, and a
+recent Obsidian build.
 
-| | Your Machine |
-|-|--------------|
-| **OS** | Linux (tested on Ubuntu 22.04+) |
-| **Python** | 3.10+ |
-| **GPU** | NVIDIA, 12GB+ VRAM |
-| **CUDA** | 12.0+ |
-| **Model** | Qwen3-4B-Instruct Q8_0 GGUF (~4GB) |
-| **Obsidian** | 0.16+ (any recent release) |
-
-### 1. Install
+Install from PyPI:
 
 ```bash
 pip install obsidian-umbra
 ```
 
-Or from source if you want the latest `main`:
+Or from `main` if you want the latest:
 
 ```bash
 git clone https://github.com/jimnoneill/obsidian-umbra
@@ -72,9 +69,8 @@ cd obsidian-umbra
 pip install -e .
 ```
 
-### 2. Download a Model
-
-Default — Qwen3-4B-Instruct Q8_0 (4.3 GB, best quality on 24GB+ VRAM):
+Download the model. The default is Qwen3-4B-Instruct Q8 (4.3 GB, best
+quality on a 24GB+ card):
 
 ```bash
 mkdir -p ~/models
@@ -82,89 +78,90 @@ huggingface-cli download Qwen/Qwen3-4B-Instruct-2507-GGUF \
   Qwen3-4B-Instruct-2507-Q8_0.gguf --local-dir ~/models
 ```
 
-Lighter — Qwen3-4B-Instruct Q4_K_M (2.5 GB, runs fine on 12GB):
+If you only have 12GB VRAM, swap in Q4_K_M (2.5 GB) which is indistinguishable
+in practice for this workload. Any GGUF instruct model works. Llama 3,
+Mistral, Gemma, and Phi-3 are all fine. [docs/models.md](docs/models.md)
+has the compatibility matrix.
 
-```bash
-huggingface-cli download Qwen/Qwen3-4B-Instruct-2507-GGUF \
-  Qwen3-4B-Instruct-2507-Q4_K_M.gguf --local-dir ~/models
-```
-
-Any GGUF instruct model works — Llama 3, Mistral, Gemma, Phi-3. See
-[docs/models.md](docs/models.md) for the supported-models matrix.
-
-### 3. Configure
+Copy the example config and edit it to point at your vault and model:
 
 ```bash
 cp config.yaml.example config.yaml
 ```
 
-Edit `config.yaml`:
-
 ```yaml
-vault: ~/Documents/MyVault                                 # Your Obsidian vault
-model_path: ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf      # Any GGUF instruct model
-model_name: Qwen3-4B-Instruct-2507                         # Label used in logs
-chat_format: chatml                                        # See docs/models.md
-output_subdir: umbra                                       # Topic notes land here
-state_dir: ~/.obsidian-umbra                               # State/cache/logs
-cuda_visible_devices: "0"                                  # Which GPU
+vault: ~/Documents/MyVault
+model_path: ~/models/Qwen3-4B-Instruct-2507-Q8_0.gguf
+model_name: Qwen3-4B-Instruct-2507
+chat_format: chatml
+output_subdir: umbra
+state_dir: ~/.obsidian-umbra
+cuda_visible_devices: "0"
 ```
 
-### 4. Run
+Then run the whole pipeline:
 
 ```bash
 ./deploy.sh all
 ```
 
-First run on a large vault takes ~2 min per 50 daily notes + ~1 min for the other three phases combined. Re-runs are idempotent and take seconds.
+On a large vault the first run takes roughly two minutes per fifty daily
+notes for the LLM pass, plus about a minute for the other three phases
+combined. Every subsequent run is idempotent and finishes in seconds.
 
-### 5. Install the Cron Job (Optional)
+If you want it to keep up with new journal entries automatically:
 
 ```bash
 (crontab -l 2>/dev/null; echo "0 4 * * *  $PWD/deploy.sh all") | crontab -
 ```
 
-Every morning at 4am, new daily notes get split and the graph is refreshed.
+## How it works
 
----
+Four phases run in sequence. Each one is idempotent and can be run on its
+own. The important thing is that none of them overwrite your prose. Every
+section Umbra writes is bracketed by an `<!-- umbra: ... -->` marker pair,
+and re-runs only touch the content inside those brackets.
 
-## How It Works
+The **daily splitter** reads each daily note, filenames in the form
+`MM-DD-YYYY.md` or `YYYY-MM-DD.md`. It calls the local LLM in JSON mode,
+asks for the distinct topics, and writes one titled topic note per result
+with YAML frontmatter and a backlink to the source daily.
 
-Four phases run in sequence. Each is idempotent and can be run alone.
+The **semantic backlinks** phase embeds every note in your vault with
+Potion-32M, a 256-dimensional static embedding that runs on CPU in under
+a second for a thousand notes. It computes pairwise cosine similarity,
+adds a small tag-overlap bonus, and writes a `## Related Notes` section
+with the top five hits and their similarity percentages.
 
-```
-daily notes  ─►  Phase 1  ─►  topic notes  ─►  Phase 2  ─►  Related Notes
-                Qwen3-4B                        Potion-32M
-                  JSON                          top-K cosine
+The **keyword linker** is the one that actually lights up the graph. It
+builds an index of note stems, titles, and folder names, then scans every
+note for body-text mentions of those names and wraps them in `[[wikilinks]]`.
+It skips YAML, code fences, existing links, headings, URLs, and HTML
+comments. Single-word keywords have to pass a specificity test (CamelCase,
+acronym, or digit-bearing) so common English words like "money" and "code"
+don't get linked to random notes.
 
-                                  ─►  Phase 3  ─►  inline [[wikilinks]]
-                                      keyword
-                                      matcher
+The **synonym linker** handles the case where you wrote about the same
+concept on three different days with three different words. It embeds
+concept-note titles with GTE-large (1024-dim), clusters them with cuML
+HDBSCAN, and writes a `## Same Concept` section between cluster siblings.
+Mega-clusters larger than twenty members collapse to a hub-and-spoke
+pattern: every member links to the centroid-closest representative, and
+the representative gets links to its top five nearest neighbors, so
+recurring project themes don't get buried in a 29-item list.
 
-                                  ─►  Phase 4  ─►  ## Same Concept
-                                      GTE-large
-                                      + HDBSCAN
-```
+## Before and after
 
-1. **Daily Splitter** — reads each daily note (MM-DD-YYYY or YYYY-MM-DD), calls Qwen3-4B-Instruct locally via llama-cpp-python in JSON mode, extracts distinct topics, writes one titled markdown note per topic with YAML frontmatter and source backlinks.
-2. **Semantic Backlinks** — embeds every note with Potion-32M (256-dim static embeddings, deterministic, fast), computes pairwise cosine similarity plus tag-overlap bonus, appends a `## Related Notes` section with top-5 links and similarity %.
-3. **Keyword Linker** — builds a keyword index from non-daily note stems, titles, and folder names. Injects inline `[[wikilinks]]` wherever a keyword appears in body text. Skips YAML, code blocks, existing links, headings, URLs, HTML comments. Single-word keywords must be CamelCase / acronym / digit-bearing to avoid false positives on common English.
-4. **Synonym Linker** — embeds concept-note titles with GTE-large (1024-dim), clusters with cuML HDBSCAN, writes a `## Same Concept` section between cluster siblings. Mega-clusters (>20 members) collapse to hub-and-spoke — each member gets one link to the centroid-closest representative.
-
-All three section markers (`<!-- umbra: ... -->`) are used to safely regenerate sections without mangling your writing.
-
----
-
-## Before / After
-
-Try the included demo vault — a grad student studying Plato's *Allegory of the Cave* (22 daily notes + 24 topic notes, seeded with real OpenAlex references).
+The repo ships a demo vault based on a made-up grad student's notes on
+Plato's Allegory of the Cave. 22 daily entries, 24 topic notes, seeded
+with real OpenAlex paper references. To see what Umbra actually does,
+diff one daily note:
 
 ```bash
-# Compare a single daily note
 diff examples/before/01-15-2024.md examples/after/01-15-2024.md
 ```
 
-**Before** (daily note as written):
+The same entry before and after. Start with the original:
 
 ```markdown
 Distracted day. Reading around the edges.
@@ -177,7 +174,7 @@ Then the ascent tracks: aisthesis → doxa → dianoia → noesis. The
 divided line literally fits inside the cave.
 ```
 
-**After** (same note, Umbra-processed):
+After the pipeline:
 
 ```markdown
 Distracted day. Reading around the edges.
@@ -202,89 +199,74 @@ Then the ascent tracks: aisthesis → doxa → dianoia → noesis. The
 - [[plato-cave-epistemic-contexts-2024-01-28|The Cave as Epistemic Context Shift]] (77%)
 ```
 
-Browse the full `examples/after/` directory to see generated topic notes, hub/spoke synonym clusters, and the auto-built `NOTE_INDEX.md`.
-
----
+The original prose is untouched. Two inline wikilinks, a generated
+topic-links section, and a related-notes section got appended. Browse
+`examples/after/` for the rest: generated topic notes, hub-spoke
+synonym clusters, and the auto-built `NOTE_INDEX.md`.
 
 ## Commands
 
 ```bash
-./deploy.sh install    # pip install -e .
-./deploy.sh all        # Run Phase 1 → 2 → 3 → 4
-./deploy.sh split      # Phase 1 — daily note splitter
-./deploy.sh semantic   # Phase 2 — semantic backlinks
-./deploy.sh keywords   # Phase 3 — keyword linker
-./deploy.sh synonyms   # Phase 4 — synonym clustering
-./deploy.sh status     # Tail each phase's log
-./deploy.sh logs       # Live-tail all logs
-./deploy.sh help       # Show all commands
+./deploy.sh install     # pip install -e .
+./deploy.sh all         # run phases 1 through 4
+./deploy.sh split       # phase 1, daily note splitter
+./deploy.sh semantic    # phase 2, semantic backlinks
+./deploy.sh keywords    # phase 3, keyword linker
+./deploy.sh synonyms    # phase 4, synonym clustering
+./deploy.sh status      # tail each phase's log
+./deploy.sh logs        # live-tail all logs
+./deploy.sh help        # show all commands
 ```
 
-Each phase also accepts per-phase flags (`--dry-run`, `--rebuild`, `--one PATH`, `--stats`). Pass them after the phase name:
+Each phase also takes its own flags (`--dry-run`, `--rebuild`, `--one PATH`,
+`--stats`). Pass them after the phase name:
 
 ```bash
 ./deploy.sh split --dry-run --since 2024-06-01
 ./deploy.sh synonyms --stats
 ```
 
----
-
 ## Documentation
 
-| Document | Description |
-|----------|-------------|
-| [Phases](docs/phases.md) | Deep dive on each of the four phases |
-| [Models](docs/models.md) | Supported LLMs + Q4 vs Q8 quantization |
-| [Configuration](docs/configuration.md) | All settings reference |
-| [Troubleshooting](docs/troubleshooting.md) | Common issues & fixes |
-| [Manual Setup](docs/manual-setup.md) | Step-by-step without scripts |
-| [Releasing](docs/releasing.md) | Maintainer version + PyPI workflow |
-| [Changelog](CHANGELOG.md) | Version history (SemVer) |
+The detailed per-phase walkthrough is in [docs/phases.md](docs/phases.md).
+The model compatibility matrix and the Q4 vs Q8 recommendation is in
+[docs/models.md](docs/models.md). Every config key is documented in
+[docs/configuration.md](docs/configuration.md). Common failure modes are
+in [docs/troubleshooting.md](docs/troubleshooting.md), and if you'd rather
+run the phases by hand [docs/manual-setup.md](docs/manual-setup.md) shows
+that path. Maintainer SemVer release process lives in
+[docs/releasing.md](docs/releasing.md) with the version history in
+[CHANGELOG.md](CHANGELOG.md).
 
----
+## When something goes wrong
 
-## Troubleshooting
+| Symptom | Likely cause |
+|---|---|
+| `llama-cpp-python` won't build with CUDA | Needs `CMAKE_ARGS="-DGGML_CUDA=on"` |
+| `cuml` import fails | pip wheels are unreliable; install from RAPIDS conda |
+| Every run re-embeds everything | Mtime cache went stale, try `--rebuild` |
+| Phase 3 linked "money" or "code" | Specificity filter isn't catching a duplicate note |
+| Phase 4 produced one giant cluster | Tune `max_cluster_full_crosslink` down |
 
-| Issue | Fix |
-|-------|-----|
-| `llama-cpp-python` won't build with CUDA | Rebuild with `CMAKE_ARGS="-DGGML_CUDA=on"`; see [troubleshooting](docs/troubleshooting.md) |
-| `cuml` import fails | Install from RAPIDS conda, not pip |
-| Every run re-embeds all notes | Writes change mtimes; Umbra refreshes mtime cache after writes — check `state_dir/cache/` |
-| Phase 3 links generic words like "money" | Already filtered; check your STOP_WORDS / `is_specific_keyword` logic |
-| Phase 4 mega-clusters unusable | Lower `max_cluster_full_crosslink` in config; hub/spoke always kicks in |
-
-[Full troubleshooting guide →](docs/troubleshooting.md)
-
----
+Full fixes in [docs/troubleshooting.md](docs/troubleshooting.md).
 
 ## Requirements
 
-- **Obsidian**: 0.16+ (any recent version)
-- **Python**: 3.10+
-- **NVIDIA driver**: 525+ for CUDA 12
-- **llama-cpp-python**: 0.3.0+ (built with `GGML_CUDA=on` for speed)
-- **sentence-transformers**: 3.0+ (pulls GTE-large on first run, ~500MB)
-- **model2vec**: 0.3.0+ (Potion-32M, ~40MB)
-- **cuml**: RAPIDS release matching your CUDA (HDBSCAN on GPU)
-
----
+Obsidian 0.16 or newer. Python 3.10+. NVIDIA driver 525+ for CUDA 12.
+`llama-cpp-python` 0.3.0+, built with `GGML_CUDA=on` for real speed.
+`sentence-transformers` 3.0+ (pulls GTE-large on first run, about 500MB).
+`model2vec` 0.3.0+ (Potion-32M, 40MB). `cuml` matching your CUDA, for
+HDBSCAN on GPU.
 
 ## Support
 
-If this saved you from hand-wikilinking a decade of journal entries, you can throw a few bucks my way. No pressure.
+If Umbra saved you from hand-wikilinking a decade of journal entries,
+contributions toward continued work are welcome.
 
 <p>
   <a href="https://paypal.me/jimnoneill"><img src="https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal" alt="Donate via PayPal"></a>
 </p>
 
----
-
 ## License
 
-MIT © 2026
-
----
-
-<p align="center">
-  <sub>Shadows on the wall. The real forms are your notes.</sub>
-</p>
+MIT, 2026.
