@@ -10,16 +10,16 @@ Ethics, politics, biology, logic — Aristotle systematizes almost everything. [
 ## Related Notes
 
 - [[Plato|Plato]] (78%)
+- [[01-11-2024|01-11-2024]] (75%)
 - [[Socrates|Socrates]] (74%)
-- [[01-11-2024|01-11-2024]] (73%)
-- [[aristotle-third-man-argument-2024-01-11|Aristotle's Third Man Argument Critique]] (71%)
-- [[02-03-2024|02-03-2024]] (69%)
+- [[02-26-2024|02-26-2024]] (70%)
+- [[02-03-2024|02-03-2024]] (70%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[aristotle-third-man-argument-2024-01-11|Aristotle's Third Man Argument Critique]]
+- [[aristotle-third-man-argument|Aristotle's Third Man Argument Critique]]
 
 <!-- umbra: synonyms -->

@@ -11,11 +11,11 @@ Anticipated hard questions:
 <!-- umbra: related notes -->
 ## Related Notes
 
-- [[01-11-2024|01-11-2024]] (75%)
-- [[02-26-2024|02-26-2024]] (74%)
-- [[02-03-2024|02-03-2024]] (72%)
-- [[03-04-2024|03-04-2024]] (71%)
-- [[Meno|Meno]] (70%)
+- [[01-11-2024|01-11-2024]] (77%)
+- [[02-26-2024|02-26-2024]] (76%)
+- [[02-03-2024|02-03-2024]] (74%)
+- [[03-04-2024|03-04-2024]] (73%)
+- [[06-07-2024|06-07-2024]] (72%)
 
 <!-- umbra: related notes -->
 
@@ -24,8 +24,8 @@ Anticipated hard questions:
 
 - [[Reading List|Reading List (Dissertation)]]
 - [[Chapter Outlines|Thesis Chapter Outlines]]
-- [[chapter-submission-defense-schedule-2024-07-08|Chapter Submission and Defense Schedule]]
-- [[chapter3outlinedeadline-2024-04-15|Chapter 3 Outline Deadline]]
-- [[july-work-plan-chapter-4-5-2024-07-08|July Work Plan for Chapters 4 and 5]]
+- [[chapter-submission-defense-schedule|Chapter Submission and Defense Schedule]]
+- [[chapter3outlinedeadline|Chapter 3 Outline Deadline]]
+- [[july-work-plan-chapter-4-5|July Work Plan for Chapters 4 and 5]]
 
 <!-- umbra: synonyms -->

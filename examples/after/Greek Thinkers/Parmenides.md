@@ -7,17 +7,17 @@ c. 515-? BCE. Eleatic. The deep background for [[Plato|Plato]]'s [[Metaphysics|m
 <!-- umbra: related notes -->
 ## Related Notes
 
-- [[plato-parmenides-recantation-2024-01-11|Did Plato Abandon Forms in Parmenides?]] (76%)
-- [[01-11-2024|01-11-2024]] (72%)
+- [[01-11-2024|01-11-2024]] (74%)
+- [[plato-parmenides-recantation|Did Plato Abandon Forms in Parmenides?]] (73%)
+- [[02-09-2024|02-09-2024]] (64%)
 - [[Socrates|Socrates]] (63%)
-- [[02-03-2024|02-03-2024]] (61%)
-- [[Aristotle|Aristotle]] (61%)
+- [[02-03-2024|02-03-2024]] (62%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[plato-parmenides-recantation-2024-01-11|Did Plato Abandon Forms in Parmenides?]]
+- [[plato-parmenides-recantation|Did Plato Abandon Forms in Parmenides?]]
 
 <!-- umbra: synonyms -->

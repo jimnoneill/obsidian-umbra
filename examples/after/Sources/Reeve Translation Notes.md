@@ -10,17 +10,16 @@ Reeve's introduction is underrated — the discussion of the [[Divided Line|divi
 ## Related Notes
 
 - [[Republic|Republic]] (64%)
-- [[plato-revee-intro-comparison-2024-01-15|Reeve's Intro Offers Similar Framework]] (61%)
+- [[plato-revee-intro-comparison|Reeve's Intro Offers Similar Framework]] (59%)
 - [[Murdoch Sovereignty of Good|Murdoch — The Sovereignty of Good]] (58%)
-- [[05-22-2024|05-22-2024]] (55%)
-- [[01-11-2024|01-11-2024]] (55%)
+- [[01-15-2024|01-15-2024]] (55%)
+- [[05-22-2024|05-22-2024]] (54%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[plato-revee-intro-comparison-2024-01-15|Reeve's Intro Offers Similar Framework]]
-- [[seventh-letter-platonic-view-2024-02-26|Incorporating the Seventh Letter Despite Authenticity Doubts]]
+- [[plato-revee-intro-comparison|Reeve's Intro Offers Similar Framework]]
 
 <!-- umbra: synonyms -->

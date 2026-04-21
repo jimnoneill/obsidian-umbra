@@ -8,29 +8,82 @@ prose is never touched.
 
 ## Phase 1 — Daily Note Splitter (`umbra split`)
 
-**Input**: daily notes in vault root, filenames matching `MM-DD-YYYY.md`
-or `YYYY-MM-DD.md`. (Also scans `ZJournal Notes/` and `Journal/` if
-present.)
+Phase 1 scans daily notes (filenames matching `MM-DD-YYYY.md` or
+`YYYY-MM-DD.md`, plus the `ZJournal Notes/` and `Journal/`
+sub-directories if they exist), asks the local LLM to pull out each
+distinct topic, and then either appends to an existing topic note or
+creates a new one.
 
-**Model**: Qwen3-4B-Instruct (Q8_0, ~4GB), loaded locally via
-llama-cpp-python. JSON output enforced via `response_format`.
+The model is Qwen3-4B-Instruct by default (Q8_0 for 24GB+ VRAM, Q4_K_M
+for 12GB), loaded through llama-cpp-python with JSON output enforced.
+Any other GGUF instruct model works once `chat_format` is set to match.
 
-**Output**: one titled topic note per extracted theme, written to
-`<vault>/<output_subdir>/<slug>-YYYY-MM-DD.md`. Each has:
+### The match-before-writing flow
 
-- YAML frontmatter: `title`, `date`, `source`, `tags`, `summary`, `auto_generated`
-- H1 heading
-- Source backlink: `> Source: [[MM-DD-YYYY]] · YYYY-MM-DD`
-- Body: excerpted content in the author's first-person voice
-- Auto-generated footer
+For each topic the LLM extracts from a daily entry, the splitter
+embeds `title + content[:500]` with Potion-32M (the same 256-dim
+static embeddings Phase 2 uses) and compares against every existing
+topic note. If cosine similarity clears `merge_similarity_threshold`
+(default 0.65), the topic gets appended to that file as a new
+`## Update YYYY-MM-DD` section. Otherwise it becomes a fresh topic
+note.
 
-The daily note itself gets a `## Topics` section appended with
-`[[wikilinks]]` to each generated topic note.
+The default threshold was chosen by running 50 pairs from real
+journaling data through the matcher. At 0.65 the sample had zero
+false-positive merges with 80% recall. Most of the "missed" pairs
+were really different concepts that an earlier clustering pass had
+grouped together too aggressively, so true-human recall is higher
+than the benchmark suggests. Push the threshold up for more
+conservative matching (fewer merges, more files), down for more
+aggressive merging (more merges, slightly higher false-positive risk).
 
-**Idempotency**: `state.json` in `state_dir/` tracks processed files by
-mtime. Only new or modified daily notes are re-processed.
+### What a topic note looks like
 
-**CLI**:
+Fresh notes get a clean filename (`<slug>.md`, no date suffix) and
+multi-date frontmatter from day one:
+
+```yaml
+---
+title: Gastroparesis Flare
+date_first: 2024-01-15
+date_last: 2026-04-21
+dates: [2024-01-15, 2024-03-22, 2026-04-21]
+sources: [[[01-15-2024]], [[03-22-2024]], [[04-21-2026]]]
+tags: [health, gastroparesis]
+auto_generated: true
+---
+```
+
+Body starts with an H1 title and a source backlink for the first
+entry. Each subsequent merge appends an `## Update YYYY-MM-DD`
+section with its own source backlink so every contribution stays
+traceable to the daily note it came from.
+
+### Legacy notes
+
+Topic notes left behind by 0.1.0 use the older `<slug>-YYYY-MM-DD.md`
+filename and single-date (`date`, `source`) frontmatter. They're
+still indexed as match targets and get their frontmatter upgraded
+the first time a newer daily entry merges into them. No mass
+migration, no rename.
+
+### Same-day coalescing
+
+If the LLM splits a single daily entry into multiple topics that
+happen to match the same existing file, they coalesce into one
+combined `## Update` section instead of producing two same-day
+sections. Keeps the target file clean when a day's thoughts orbit
+the same concept from multiple angles.
+
+### Idempotency
+
+`state.json` in `state_dir/` tracks processed daily notes by mtime.
+Only new or modified daily notes are re-processed. The topic index
+is cached at `state_dir/cache/topic_index.{npz,meta.json}` keyed by
+path+mtime, so only changed or new topic notes get re-embedded on
+each run.
+
+### CLI
 
 ```bash
 umbra split                             # incremental
@@ -39,6 +92,10 @@ umbra split --since 2024-06-01          # notes with date >= 2024-06-01
 umbra split --dry-run                   # extract, log, don't write
 umbra split --one vault/2024-06-15.md   # single file
 ```
+
+`--dry-run` is especially useful after changing the threshold: it
+prints `MERGE` vs `NEW` for every extracted topic without touching
+disk.
 
 ---
 

@@ -9,9 +9,9 @@ The [[Form of the Good|Form of the Good]] is the highest — not a Form among [[
 
 - [[Forms|Theory of Forms]] (78%)
 - [[Form of the Good|Form of the Good]] (71%)
-- [[epekeina-tes-ousias-interpretation-2024-05-22|Interpreting 'Beyond Being' in Plato]] (69%)
-- [[05-22-2024|05-22-2024]] (66%)
-- [[01-11-2024|01-11-2024]] (65%)
+- [[05-22-2024|05-22-2024]] (69%)
+- [[01-11-2024|01-11-2024]] (68%)
+- [[Aristotle|Aristotle]] (64%)
 
 <!-- umbra: related notes -->
 

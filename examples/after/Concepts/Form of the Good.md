@@ -9,15 +9,15 @@ The sun is its image. Disputed whether the Good is itself a Form or something be
 
 - [[Metaphysics|Metaphysics]] (71%)
 - [[05-22-2024|05-22-2024]] (70%)
-- [[epekeina-tes-ousias-interpretation-2024-05-22|Interpreting 'Beyond Being' in Plato]] (68%)
-- [[sun-analogy-good-being-2024-05-22|Sun Analogy and the Nature of the Good]] (63%)
-- [[sun-good-analogy-forms-hierarchy-2024-01-11|Sun-Good Analogy: Forms or Hierarchy?]] (62%)
+- [[01-11-2024|01-11-2024]] (61%)
+- [[02-26-2024|02-26-2024]] (61%)
+- [[Forms|Theory of Forms]] (61%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[murdoch-good-as-attention-2024-03-25|The Good as Object of Attention]]
+- [[Forms|Theory of Forms]]
 
 <!-- umbra: synonyms -->

@@ -7,17 +7,17 @@ Key move: understanding the Good is not propositional — it's formative. You ca
 <!-- umbra: related notes -->
 ## Related Notes
 
-- [[annas-platonic-ethics-book-review-2024-02-03|Reading Julia Annas on Platonic Ethics]] (78%)
-- [[plato-moral-realism-form-good-2024-02-03|Plato's Commitment to Moral Realism]] (74%)
-- [[02-26-2024|02-26-2024]] (73%)
-- [[02-03-2024|02-03-2024]] (71%)
-- [[plato-good-not-information-2024-02-26|The Good Is Not Information to Be Transferred]] (66%)
+- [[annas-platonic-ethics-book-review|Reading Julia Annas on Platonic Ethics]] (75%)
+- [[02-03-2024|02-03-2024]] (75%)
+- [[02-26-2024|02-26-2024]] (75%)
+- [[03-04-2024|03-04-2024]] (70%)
+- [[03-25-2024|03-25-2024]] (70%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[annas-platonic-ethics-book-review-2024-02-03|Reading Julia Annas on Platonic Ethics]]
+- [[annas-platonic-ethics-book-review|Reading Julia Annas on Platonic Ethics]]
 
 <!-- umbra: synonyms -->

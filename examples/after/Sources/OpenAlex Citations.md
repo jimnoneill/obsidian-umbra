@@ -34,10 +34,10 @@
 <!-- umbra: related notes -->
 ## Related Notes
 
-- [[03-11-2024|03-11-2024]] (47%)
+- [[03-11-2024|03-11-2024]] (46%)
 - [[Reading List|Reading List (Dissertation)]] (45%)
-- [[05-22-2024|05-22-2024]] (45%)
-- [[plato-dialectic-republic-downward-2024-03-11|Plato's Downward Dialectic in Republic VI-VII]] (43%)
+- [[04-15-2024|04-15-2024]] (44%)
+- [[05-22-2024|05-22-2024]] (43%)
 - [[Republic|Republic]] (43%)
 
 <!-- umbra: related notes -->

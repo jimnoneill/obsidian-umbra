@@ -10,19 +10,18 @@ Interpretations: epistemological ascent, political critique of opinion, Platonic
 ## Related Notes
 
 - [[03-19-2024|03-19-2024]] (83%)
-- [[01-08-2024|01-08-2024]] (81%)
-- [[01-28-2024|01-28-2024]] (75%)
-- [[plato-cave-shadows-puppeteers-2024-03-19|Who Holds the Puppeteers in Plato's Cave?]] (74%)
-- [[03-04-2024|03-04-2024]] (74%)
+- [[01-08-2024|01-08-2024]] (82%)
+- [[01-28-2024|01-28-2024]] (76%)
+- [[03-04-2024|03-04-2024]] (73%)
+- [[01-15-2024|01-15-2024]] (72%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[cave-allegory-emotional-tonality-2024-02-20|Is the Cave Allegory Depressing?]]
-- [[cave-allegory-stages-2024-01-08|Three Stages of the Cave Allegory]]
-- [[cave-political-vs-epistemic-2024-01-08|Political or Epistemic Thesis for the Cave?]]
-- [[plato-cave-political-epistemological-work-2024-03-19|The Cave Allegory's Dual Political and Epistemological Function]]
+- [[cave-allegory-emotional-tonality|Is the Cave Allegory Depressing?]]
+- [[cave-allegory-stages|Three Stages of the Cave Allegory]]
+- [[cave-vs-recollection|Is the Cave an Analogy of Recollection?]]
 
 <!-- umbra: synonyms -->

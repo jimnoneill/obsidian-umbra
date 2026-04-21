@@ -10,14 +10,14 @@ In later dialogues ([[Republic|Republic]], [[Phaedo|Phaedo]]) [[Socrates|Socrate
 - [[Socrates|Socrates]] (76%)
 - [[Dialectic|Dialectic]] (73%)
 - [[Plato|Plato]] (71%)
-- [[Meno|Meno]] (70%)
-- [[Epistemology|Epistemology]] (70%)
+- [[02-03-2024|02-03-2024]] (71%)
+- [[01-11-2024|01-11-2024]] (70%)
 
 <!-- umbra: related notes -->
 
 <!-- umbra: synonyms -->
 ## Same Concept
 
-- [[compulsion-in-epistemology-2024-01-08|Compulsion in Socratic Epistemology]]
+- [[compulsion-in-epistemology|Compulsion in Socratic Epistemology]]
 
 <!-- umbra: synonyms -->

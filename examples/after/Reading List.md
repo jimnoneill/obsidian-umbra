@@ -17,11 +17,11 @@
 <!-- umbra: related notes -->
 ## Related Notes
 
+- [[02-26-2024|02-26-2024]] (66%)
+- [[05-22-2024|05-22-2024]] (65%)
 - [[01-11-2024|01-11-2024]] (64%)
-- [[05-22-2024|05-22-2024]] (63%)
+- [[02-03-2024|02-03-2024]] (64%)
 - [[Theaetetus|Theaetetus]] (63%)
-- [[02-26-2024|02-26-2024]] (62%)
-- [[02-03-2024|02-03-2024]] (62%)
 
 <!-- umbra: related notes -->
 
@@ -30,8 +30,8 @@
 
 - [[Chapter Outlines|Thesis Chapter Outlines]]
 - [[Defense Prep|Defense Prep]]
-- [[chapter-submission-defense-schedule-2024-07-08|Chapter Submission and Defense Schedule]]
-- [[chapter3outlinedeadline-2024-04-15|Chapter 3 Outline Deadline]]
-- [[july-work-plan-chapter-4-5-2024-07-08|July Work Plan for Chapters 4 and 5]]
+- [[chapter-submission-defense-schedule|Chapter Submission and Defense Schedule]]
+- [[chapter3outlinedeadline|Chapter 3 Outline Deadline]]
+- [[july-work-plan-chapter-4-5|July Work Plan for Chapters 4 and 5]]
 
 <!-- umbra: synonyms -->

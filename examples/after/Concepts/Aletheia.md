@@ -7,11 +7,11 @@ Most scholars find Heidegger's reading forced, but the attention to how [[Plato|
 <!-- umbra: related notes -->
 ## Related Notes
 
-- [[01-22-2024|01-22-2024]] (81%)
-- [[heidegger-cave-truth-beginning-2024-01-22|Heidegger on the Cave as Metaphysics' Beginning]] (75%)
-- [[plato-cave-overreading-critique-2024-01-22|Critique of Heidegger's Overreading of Plato]] (70%)
-- [[02-26-2024|02-26-2024]] (64%)
-- [[Theaetetus|Theaetetus]] (64%)
+- [[01-22-2024|01-22-2024]] (83%)
+- [[heidegger-cave-truth-beginning|Heidegger on the Cave as Metaphysics' Beginning]] (72%)
+- [[plato-cave-overreading-critique|Critique of Heidegger's Overreading of Plato]] (67%)
+- [[02-26-2024|02-26-2024]] (67%)
+- [[02-03-2024|02-03-2024]] (66%)
 
 <!-- umbra: related notes -->
 

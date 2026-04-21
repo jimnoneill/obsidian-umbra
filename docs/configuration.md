@@ -30,6 +30,8 @@ Every key has an environment-variable override:
 
 ## Phase 1 — Daily Splitter
 
+Model and runtime tunables:
+
 | Key | Default | Description |
 |-----|---------|-------------|
 | `n_ctx` | 16384 | llama-cpp context window |
@@ -37,6 +39,15 @@ Every key has an environment-variable override:
 | `temperature` | 0.2 | Sampling temperature |
 | `max_tokens_per_call` | 3584 | Max tokens the LLM can emit |
 | `min_daily_note_chars` | 80 | Skip daily notes shorter than this |
+
+Merge-into-existing-topics behavior (0.2.0+):
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `merge_into_existing_topics` | `true` | Turn the match-before-writing flow on or off |
+| `merge_similarity_threshold` | 0.65 | Potion-32M cosine cutoff. Higher is more conservative. |
+| `merge_embed_snippet_len` | 500 | Chars of topic content that go into the matching embedding |
+| `append_section_heading_format` | `"## Update {date}"` | Heading used for each append. `{date}` is replaced with the daily note's YYYY-MM-DD. |
 
 ---
 

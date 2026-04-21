@@ -39,6 +39,17 @@ temperature: 0.2
 max_tokens_per_call: 3584
 min_daily_note_chars: 80
 
+# Merge-into-existing-topics behavior (0.2.0+).
+# When the splitter extracts a topic from a daily note, it embeds the
+# topic with Potion-32M and compares to every existing topic note. If
+# cosine similarity >= merge_similarity_threshold, the topic gets
+# appended to the matching file as a `## Update YYYY-MM-DD` section.
+# Otherwise a new topic note is created.
+merge_into_existing_topics: true
+merge_similarity_threshold: 0.65      # precision-first default
+merge_embed_snippet_len: 500
+append_section_heading_format: "## Update {date}"
+
 # PHASE 2 — Semantic Backlinks --------------------------------------------
 # Potion-32M (256-dim) embeddings + cosine similarity top-K + tag bonus.
 top_k_related: 5

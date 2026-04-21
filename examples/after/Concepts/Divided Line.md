@@ -10,9 +10,9 @@ The cave narratively stages the divided line.
 ## Related Notes
 
 - [[01-15-2024|01-15-2024]] (70%)
-- [[cave-sensory-perception-mathematical-knowledge-2024-01-15|Cave as Narrative of Sensory vs Mathematical Knowledge]] (66%)
-- [[02-09-2024|02-09-2024]] (61%)
-- [[01-08-2024|01-08-2024]] (55%)
-- [[01-28-2024|01-28-2024]] (54%)
+- [[02-09-2024|02-09-2024]] (63%)
+- [[01-08-2024|01-08-2024]] (56%)
+- [[01-28-2024|01-28-2024]] (56%)
+- [[cave-sensory-perception-mathematical-knowledge|Cave as Narrative of Sensory vs Mathematical Knowledge]] (54%)
 
 <!-- umbra: related notes -->

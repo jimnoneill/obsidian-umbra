@@ -11,8 +11,8 @@ Relation to the cave: both describe the acquisition of knowledge as a *recovery*
 
 - [[Phaedo|Phaedo]] (84%)
 - [[01-28-2024|01-28-2024]] (79%)
-- [[03-04-2024|03-04-2024]] (72%)
-- [[01-08-2024|01-08-2024]] (72%)
+- [[03-04-2024|03-04-2024]] (74%)
+- [[01-08-2024|01-08-2024]] (73%)
 - [[Meno|Meno]] (71%)
 
 <!-- umbra: related notes -->

@@ -10,9 +10,16 @@ Problems: self-predication, the Third Man Argument, the problem of participation
 ## Related Notes
 
 - [[Metaphysics|Metaphysics]] (78%)
-- [[01-11-2024|01-11-2024]] (73%)
-- [[05-22-2024|05-22-2024]] (65%)
-- [[Aristotle|Aristotle]] (65%)
-- [[02-26-2024|02-26-2024]] (64%)
+- [[01-11-2024|01-11-2024]] (75%)
+- [[05-22-2024|05-22-2024]] (67%)
+- [[03-04-2024|03-04-2024]] (66%)
+- [[02-26-2024|02-26-2024]] (65%)
 
 <!-- umbra: related notes -->
+
+<!-- umbra: synonyms -->
+## Same Concept
+
+- [[Form of the Good|Form of the Good]]
+
+<!-- umbra: synonyms -->

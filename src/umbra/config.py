@@ -31,6 +31,14 @@ class Config:
     max_tokens_per_call: int = 3584
     min_daily_note_chars: int = 80
 
+    # When a new daily-note topic is extracted, check whether an existing
+    # topic note covers the same concept and append instead of creating
+    # a new file. Match via Potion-32M cosine similarity.
+    merge_into_existing_topics: bool = True
+    merge_similarity_threshold: float = 0.65
+    merge_embed_snippet_len: int = 500
+    append_section_heading_format: str = "## Update {date}"
+
     # Phase 2 (semantic backlinks) ------------------------------------------
     top_k_related: int = 5
     min_similarity: float = 0.30
