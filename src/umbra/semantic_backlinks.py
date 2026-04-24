@@ -20,7 +20,7 @@ from pathlib import Path
 import numpy as np
 import yaml
 
-from .common import MARKER_RELATED, log_line, should_skip
+from .common import MARKER_RELATED, is_daily_note, log_line, should_skip
 from .config import Config, load_config
 
 
@@ -155,7 +155,8 @@ def write_related_section(note: dict, related: list[tuple[dict, float]],
 
 def generate_note_index(notes: list[dict], cfg: Config, stem_map) -> str:
     by_dir: dict[str, list[dict]] = defaultdict(list)
-    for n in notes:
+    indexable = [n for n in notes if not is_daily_note(Path(n["path"]))]
+    for n in indexable:
         parent = str(Path(n["rel"]).parent)
         if parent == ".":
             parent = "(root)"
@@ -163,7 +164,7 @@ def generate_note_index(notes: list[dict], cfg: Config, stem_map) -> str:
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     lines = ["---", "title: Note Index", "auto_generated: true",
              f"generated_at: '{ts}'", "---", "", "# Note Index", "",
-             f"*{len(notes)} notes indexed on {ts}*", ""]
+             f"*{len(indexable)} notes indexed on {ts}*", ""]
     for dirname in sorted(by_dir.keys()):
         lines += [f"## {dirname if dirname != '(root)' else 'Root'}", ""]
         for n in sorted(by_dir[dirname], key=lambda x: x["title"].lower()):
@@ -268,10 +269,12 @@ def main(argv: list[str] | None = None) -> int:
 
     emb = build_embeddings_incremental(notes, cfg, args.rebuild, log_file)
     sim = np.clip(cosine_matrix(emb) + tag_bonus_matrix(notes, cfg), 0.0, 1.0)
+    daily_mask = np.array([is_daily_note(Path(n["path"])) for n in notes])
     related_map = {}
     for i in range(len(notes)):
         s = sim[i].copy()
         s[i] = -1
+        s[daily_mask] = -1  # never surface a daily note as a related target
         top = np.argsort(s)[::-1][:cfg.top_k_related]
         related_map[i] = [(int(j), float(s[j])) for j in top
                           if s[j] >= cfg.min_similarity]

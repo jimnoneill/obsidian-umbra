@@ -229,7 +229,7 @@ def write_topic_note(topic: dict, date_str: str, source_stem: str,
         "date_first": date_str,
         "date_last": date_str,
         "dates": [date_str],
-        "sources": [f"[[{source_stem}]]"],
+        "sources": [source_stem],
         "tags": topic.get("tags", []),
         "summary": topic.get("summary", ""),
         "auto_generated": True,
@@ -239,7 +239,7 @@ def write_topic_note(topic: dict, date_str: str, source_stem: str,
     body = (
         f"---\n{_fmt_yaml(fm)}\n---\n\n"
         f"# {topic['title']}\n\n"
-        f"> First entry: [[{source_stem}]] · {date_str}\n\n"
+        f"> First entry: {date_str}\n\n"
         f"{topic['content']}\n"
     )
     dest.write_text(body)
@@ -258,8 +258,8 @@ def append_to_topic_note(target: dict, topic: dict, date_str: str,
     if "dates" not in fm:
         old_date = fm.pop("date", None) or target.get("first_date", "")
         old_src = fm.pop("source", None) or ""
-        if isinstance(old_src, str) and old_src and not old_src.startswith("[["):
-            old_src = f"[[{old_src}]]"
+        if isinstance(old_src, str) and old_src.startswith("[[") and old_src.endswith("]]"):
+            old_src = old_src[2:-2]
         fm["date_first"] = old_date or date_str
         fm["date_last"] = old_date or date_str
         fm["dates"] = [old_date] if old_date else []
@@ -269,9 +269,8 @@ def append_to_topic_note(target: dict, topic: dict, date_str: str,
         fm["dates"].append(date_str)
     fm["date_last"] = max(fm["dates"])
 
-    src_link = f"[[{source_stem}]]"
-    if src_link not in fm["sources"]:
-        fm["sources"].append(src_link)
+    if source_stem not in fm["sources"]:
+        fm["sources"].append(source_stem)
 
     # Merge tags
     tags = list(fm.get("tags") or [])
@@ -292,7 +291,6 @@ def append_to_topic_note(target: dict, topic: dict, date_str: str,
     append_block = (
         f"\n\n---\n\n"
         f"{heading}\n\n"
-        f"> Source: [[{source_stem}]]\n\n"
         f"{topic['content']}\n"
     )
 

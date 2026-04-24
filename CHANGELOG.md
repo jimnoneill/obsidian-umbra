@@ -6,6 +6,24 @@ All notable changes to obsidian-umbra are documented here. Format follows
 
 ## [Unreleased]
 
+## [0.2.1] 2026-04-22
+
+Date refs no longer emit `[[wikilinks]]` to daily notes. Every topic note
+used to create a backlink to every daily that contributed to it, which
+flooded the Obsidian graph with date-node clutter.
+
+### Changed
+- Frontmatter `sources:` list now contains plain date stems
+  (`05-05-2023`) instead of `'[[05-05-2023]]'`.
+- Body no longer emits `> Source: [[daily]]` lines under `## Update`
+  headings. The heading already carries the date.
+- First-entry marker is now `> First entry: DATE` (plain) instead of
+  `> First entry: [[daily]] · DATE`.
+
+### Added
+- `scripts/strip_date_wikilinks.py` — one-shot cleanup for vaults
+  already processed by 0.2.0. Rewrites existing topic notes in place.
+
 ## [0.2.0] 2026-04-21
 
 Phase 1 no longer fragments the same concept across dozens of per-day
@@ -81,6 +99,7 @@ Initial public release.
   `pip install -e .`.
 - **Cron-ready**: `deploy.sh all` for idempotent scheduled runs.
 
-[Unreleased]: https://github.com/jimnoneill/obsidian-umbra/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/jimnoneill/obsidian-umbra/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.2.1
 [0.2.0]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.2.0
 [0.1.0]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.1.0

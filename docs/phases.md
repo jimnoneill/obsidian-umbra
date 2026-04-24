@@ -48,16 +48,18 @@ title: Gastroparesis Flare
 date_first: 2024-01-15
 date_last: 2026-04-21
 dates: [2024-01-15, 2024-03-22, 2026-04-21]
-sources: [[[01-15-2024]], [[03-22-2024]], [[04-21-2026]]]
+sources: [01-15-2024, 03-22-2024, 04-21-2026]
 tags: [health, gastroparesis]
 auto_generated: true
 ---
 ```
 
-Body starts with an H1 title and a source backlink for the first
-entry. Each subsequent merge appends an `## Update YYYY-MM-DD`
-section with its own source backlink so every contribution stays
-traceable to the daily note it came from.
+Body starts with an H1 title and a plain-text `> First entry: DATE`
+marker. Each subsequent merge appends an `## Update YYYY-MM-DD`
+section — the heading itself carries the date, so there's no separate
+source line. Daily references stay in the frontmatter as plain stems
+(not `[[wikilinks]]`) so your Obsidian graph doesn't flood with
+date-node clutter (0.2.1+).
 
 ### Legacy notes
 
