@@ -6,6 +6,20 @@ All notable changes to obsidian-umbra are documented here. Format follows
 
 ## [Unreleased]
 
+## [0.2.2] 2026-04-26
+
+Topic notes pile up in a single flat directory after enough daily entries.
+At a few hundred notes the output becomes hard to navigate. Added a
+folder organizer that bins topic notes into subfolders by their dominant
+shared tag.
+
+### Added
+- `scripts/organize_into_folders.py` — bins each topic note into
+  `<dominant-tag>/`. Notes whose tag has fewer than `--cutoff` peers
+  (default 3) collapse into `_misc/`. Idempotent: re-running flattens,
+  recounts, and re-bins. Stem uniqueness keeps `[[wikilinks]]`
+  resolving regardless of subfolder location.
+
 ## [0.2.1] 2026-04-22
 
 Date refs no longer emit `[[wikilinks]]` to daily notes. Every topic note
@@ -99,7 +113,8 @@ Initial public release.
   `pip install -e .`.
 - **Cron-ready**: `deploy.sh all` for idempotent scheduled runs.
 
-[Unreleased]: https://github.com/jimnoneill/obsidian-umbra/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/jimnoneill/obsidian-umbra/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.2.2
 [0.2.1]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.2.1
 [0.2.0]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.2.0
 [0.1.0]: https://github.com/jimnoneill/obsidian-umbra/releases/tag/v0.1.0
